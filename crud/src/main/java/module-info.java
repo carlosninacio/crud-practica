@@ -5,4 +5,6 @@ module org.example.crud {
 
     opens org.example.crud to javafx.fxml;
     exports org.example.crud;
+    exports;
+    opens to
 }

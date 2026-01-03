@@ -29,7 +29,7 @@ public class Main {
             System.out.println("\t6. Facturar");
             System.out.println("\t7. Salir");
             opcion = Integer.parseInt(sc.nextLine());
-            
+
             switch (opcion) {
                 case 1:
                     productos.forEach((id, producto) -> {
@@ -37,15 +37,23 @@ public class Main {
                     });
                     break;
                 case 2:
-                    System.out.print("Escribe el Id del producto que deseas agreagar: ");
-                    Integer idAgregar = Integer.parseInt(sc.nextLine());
-                    productos.forEach((id, producto) -> {
-                        if (idAgregar.equals(id)) {
-                            System.out.println("ERROR: ID Existente!");
-                        }
-                    });
+                    System.out.print("Escribe el Id del producto que deseas agregar: ");
+                    int idAgregar = Integer.parseInt(sc.nextLine());
+
+                    if (productos.containsKey(idAgregar)) {
+                        System.out.println("ERROR: ID existente!");
+                    } else {
+                        System.out.print("Escribe el nombre del producto: ");
+                        String nombre = sc.nextLine();
+                        System.out.print("Escribe el precio del producto: ");
+                        double precio = Double.parseDouble(sc.nextLine());
+                        productos.put(idAgregar, new Producto(nombre, precio));
+                        System.out.println("\nProducto agregado correctamente.");
+                    }
+                    break;
                 case 7:
                     cerrar = true;
+                    break;
                 default:
                     System.out.println("Opción inválida");
             }

@@ -4,6 +4,8 @@ import entidad.Producto;
 
 import java.util.HashMap;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Main {
     public static void main(String[] args) {
@@ -77,6 +79,21 @@ public class Main {
                             System.out.println("ERROR: El producto no existe");
                         }
                         break;
+                case 5:
+                    System.out.println("Productos en el carrito:");
+                    carrito.forEach((id, producto) -> {
+                        System.out.println("Id -> " + id + ", Producto -> " + producto.toString());
+                    });
+                    break;
+                case 6:
+                    AtomicInteger unidadesProductos = new AtomicInteger();
+                    AtomicReference<Double> valorTotal = new AtomicReference<>(0.0);
+                    carrito.forEach((id, producto) -> {
+                        unidadesProductos.getAndIncrement();
+                        valorTotal.updateAndGet(v -> new Double((double) (v + producto.getPrecio())));
+                    });
+                    System.out.println("El valor total por " + unidadesProductos + "productos es de: " + valorTotal);
+                    break;
                 case 7:
                     cerrar = true;
                     break;

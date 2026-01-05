@@ -9,6 +9,12 @@ public class Producto {
         this.precio = precio;
     }
 
+    // Constructor copia
+    public Producto(Producto p) {
+        this.nombre = p.nombre;
+        this.precio = p.precio;
+    }
+
     public String getNombre() {
         return nombre;
     }

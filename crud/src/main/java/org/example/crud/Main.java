@@ -26,8 +26,9 @@ public class Main {
             System.out.println("\t2. Agregar Productos");
             System.out.println("\t3. Eliminar Productos");
             System.out.println("\t4. Agregar Productos al Carrito");
-            System.out.println("\t5. Facturar");
-            System.out.println("\t6. Salir");
+            System.out.println("\t5. Ver Carrito");
+            System.out.println("\t6. Facturar");
+            System.out.println("\t7. Salir");
             opcion = Integer.parseInt(sc.nextLine());
 
             switch (opcion) {
@@ -63,11 +64,19 @@ public class Main {
                     }
                     break;
                 case 4:
-                    boolean compra = true;
-                    do {
                         System.out.print("Escribe el Id del producto que deseas agregar al carrito: ");
-                        int idComprar = Integer.parseInt(sc.nextLine())
-                    } while (compra);
+                        int idComprar = Integer.parseInt(sc.nextLine());
+                        if (productos.containsKey(idComprar)) {
+                            Producto original = productos.get(idComprar);
+                            Producto copia = new Producto(original); // CLON
+
+                            carrito.put(idComprar, copia);
+
+                            System.out.println("El producto fue agregado correctamente al carrito");
+                        } else {
+                            System.out.println("ERROR: El producto no existe");
+                        }
+                        break;
                 case 7:
                     cerrar = true;
                     break;
